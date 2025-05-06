@@ -1,0 +1,56 @@
+<!-- account/templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Проходная</title>
+</head>
+<body>
+    <h1>Добро пожаловать, {{ user.first_name }}!</h1>
+    <nav>
+        <a href="{% url 'welcome' %}">Выйти</a>
+    </nav>
+
+    <h2>Направление на:</h2>
+    <div class="departments">
+        {% for department in departments %}
+            <button
+                onclick="window.location.href='{% url department.url %}'"
+                class="department-btn"
+            >
+                {{ department.name }}
+            </button>
+        {% endfor %}
+    </div>
+
+    {% if user.is_superuser or user.employeeprofile.is_teacher %}
+        <div class="admin-actions">
+            <button
+                onclick="window.location.href='{% url 'questions_list' %}'"
+                class="btn-admin"
+            >
+                Вопросы
+            </button>
+        </div>
+    {% endif %}
+    {% if user.is_superuser %}
+        <div class="admin-actions">
+            <button
+                onclick="window.location.href='{% url 'employee_list' %}'"
+                class="btn-admin"
+            >
+                Кадры
+            </button>
+        </div>
+    {% endif %}
+    {% if user.is_superuser %}
+        <div class="admin-actions">
+            <button
+                onclick="window.location.href='{% url 'admin:index' %}'"
+                class="btn-admin"
+            >
+                Админка
+            </button>
+        </div>
+    {% endif %}
+</body>
+</html>

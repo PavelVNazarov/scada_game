@@ -1,0 +1,26 @@
+<!--templates/game/game.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SCADA Game</title>
+</head>
+<body>
+    <h1>Текстовая ролевая игра SCADA</h1>
+    {% for question in questions %}
+        <div>
+            <p>{{ question.text }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="question_id" value="{{ question.id }}">
+                <input type="text" name="answer" required>
+                <button type="submit">Ответить</button>
+            </form>
+        </div>
+    {% endfor %}
+    <h2>Статус оборудования:</h2>
+    {% for equip in equipment %}
+        <p>{{ equip.name }} - {{ equip.status|yesno:"Включено,Выключено" }}</p>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+# game/fixtures/questions.json
+[
+    {
+        "model": "game.question",
+        "pk": 1,
+        "fields": {
+            "text": "Какое давление должно быть в реакторе при запуске?",
+            "equipment_state": 1
+        }
+    },
+    {
+        "model": "game.answer",
+        "pk": 1,
+        "fields": {
+            "question": 1,
+            "text": "1.5 атм",
+            "is_correct": true
+        }
+    },
+    {
+        "model": "game.answer",
+        "pk": 2,
+        "fields": {
+            "question": 1,
+            "text": "3.0 атм",
+            "is_correct": false
+        }
+    }
+]

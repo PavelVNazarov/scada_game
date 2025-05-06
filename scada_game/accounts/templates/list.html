@@ -1,0 +1,53 @@
+<!-- accounts/list.html -->
+<head>
+    <title>Кадры</title>
+</head>
+{% block content %}
+<h1>Управление кадрами</h1>
+
+<p>Добро пожаловать, {{ user.first_name }}!</p>
+<div class="mb-3">
+    <button
+        type="button"
+        class="btn btn-primary"
+        onclick="window.location.href='{% url 'employee_create' %}'"
+    >
+        Добавить сотрудника
+    </button>
+
+    <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="window.location.href='{% url 'dashboard' %}'"
+    >
+        Назад в панель управления
+    </button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Логин</th>
+            <th>Контакт</th>
+            <th>Роль</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees %}
+        <tr>
+            <td>{{ employee.get_full_name }}</td>
+            <td>{{ employee.username }}</td>
+            <td>{{ employee.employeeprofile.contact }}</td>
+            <td>{{ employee.employeeprofile.get_role_display }}</td>
+            <td>
+                {% if not employee.is_superuser %}
+                    <a href="{% url 'employee_edit' employee.pk %}" class="btn btn-sm btn-warning">Изменить</a>
+                    <a href="{% url 'employee_delete' employee.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,52 @@
+текстовая игра про завод
+Структура проекта
+scada_game/
+│
+├── manage.py
+├── scada_game/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+│
+├── accounts/
+│   └── migrations/
+│   └── templates/
+│         ├── confirm_delete.html
+│         ├── form.html
+│         ├── list.html
+│         ├── welcome.html
+│         ├── login.html
+│         ├── dashboard.html
+│         └── questions_list.html
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+│
+├── game/
+│   └── migrations/
+│   └── templates/
+│         ├── game.html
+│         └── game_over.html
+│   ├── base.html
+│   └── game/
+│       ├── factory_entry.html
+│       ├── section_detail.html
+│       └── game_over.html
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+
+
+

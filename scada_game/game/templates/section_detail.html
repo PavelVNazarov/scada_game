@@ -1,0 +1,32 @@
+<!--game/templates/section_detail.html-->
+
+{% extends 'base.html' %}
+{% block title %}{{ section.name }}{% endblock %}
+
+{% block content %}
+<div class="section-detail">
+    <h2>{{ section.name }}</h2>
+    <p>{{ section.description }}</p>
+
+    {% if section.order == player.current_state.order %}
+    <div class="activation-panel">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="activate" class="btn btn-primary">
+                Активировать оборудование
+            </button>
+        </form>
+    </div>
+    {% endif %}
+
+    <div class="equipment-status">
+        {% if section.order <= player.current_state.order %}
+        <h4>Параметры системы:</h4>
+        <ul>
+            <li>Температура: 150°C</li>
+            <li>Давление: 2.5 атм</li>
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

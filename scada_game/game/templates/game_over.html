@@ -1,0 +1,13 @@
+<!--game/templates/game_over.html-->
+{% extends 'base.html' %}
+{% block title %}Аварийное отключение{% endblock %}
+
+{% block content %}
+<div class="game-over">
+    <h2 class="alert alert-danger">АВАРИЙНАЯ ОСТАНОВКА!</h2>
+    <p>Причина: {{ player.current_state.description }}</p>
+    <a href="{% url 'game:reset_game' %}" class="btn btn-primary">
+        Перезапустить систему
+    </a>
+</div>
+{% endblock %}

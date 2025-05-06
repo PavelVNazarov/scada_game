@@ -1,0 +1,74 @@
+<!-- game/templates/factory_entry.html -->
+{% extends 'base.html' %}
+{% block title %}Управление заводом{% endblock %}
+
+{% block content %}
+<div class="factory-interface">
+    {% if player.current_state and not player.current_state.is_active %}
+    <div class="start-panel">
+        <h2>Статус системы: {{ player.current_state.name }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="start_system" class="btn btn-primary">
+                Запустить производство
+            </button>
+        </form>
+    </div>
+    {% else %}
+    <div class="status-panel">
+        <h3>Текущий участок: {{ player.current_state.name }}</h3>
+        <p>Осталось попыток: {{ player.attempts }}</p>
+
+        <div class="sections">
+            {% for state in equipment_states %}
+            <a href="{% url 'game:section_detail' state.id %}"
+               class="btn {% if state.order <= player.current_state.order %}btn-primary{% else %}disabled{% endif %}">
+               {{ state.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if question %}
+    <div class="question-modal">
+        <h4>{{ question.text }}</h4>
+        <form id="answerForm">
+            {% csrf_token %}
+            {% for answer in question.answer_set.all %}
+            <label class="answer-option">
+                <input type="radio" name="answer" value="{{ answer.id }}">
+                {{ answer.text }}
+            </label>
+            {% endfor %}
+            <button type="button" onclick="submitAnswer()" class="btn btn-primary">
+                Подтвердить
+            </button>
+        </form>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
+<script>
+function submitAnswer() {
+    const answerId = document.querySelector('input[name="answer"]:checked')?.value;
+    if (!answerId) return alert('Выберите ответ!');
+
+    fetch("{% url 'check_answer' %}", {
+        method: 'POST',
+        headers: {'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value},
+        body: new URLSearchParams({answer_id: answerId})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            window.location.reload();
+        } else if (data.status === 'failed') {
+            window.location.href = "{% url 'game_over' %}";
+        } else {
+            alert(data.message);
+        }
+    });
+}
+</script>
+{% endblock %}

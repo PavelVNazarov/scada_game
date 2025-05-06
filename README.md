@@ -72,22 +72,33 @@ python manage.py runserver
 Конфигурация системы: /admin/game/
 
 🗂 Структура проекта
+
 scada_game/
+
 ├── accounts/          # Управление пользователями
+
 │   ├── models.py      # Модели EmployeeProfile
+
 │   └── views.py       # Логика авторизации
+
 │
 ├── game/              # Основная игровая логика
+
 │   ├── models.py      # Оборудование, вопросы, прогресс
+
 │   └── views.py       # Контроллеры игры
 │
+
 └── templates/         # Шаблоны HTML
+
     ├── game/          # Игровые интерфейсы
+    
     └── accounts/      # Формы авторизации
+    
 📄 Лицензия
 MIT License. Подробнее в файле LICENSE.
 
 🤝 Контакты
-Автор: [Ваше имя]
-Email: your.email@example.com
-Telegram: @yournickname
+Автор: Павел
+Email: 19pavel76@mail.ru
+Telegram: 

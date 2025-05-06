@@ -1,31 +1,61 @@
 <!--templates/base.html-->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>SCADA Game - {% block title %}{% endblock %}</title>
+    <title>Игровая SCADA-система</title>
     <style>
-        .navbar { background: #2c3e50; padding: 1rem; }
-        .navbar a { color: white; margin-right: 1rem; }
-        .alert { padding: 1rem; margin: 1rem 0; }
-        .alert-danger { background: #e74c3c; color: white; }
-        .btn { padding: 0.5rem 1rem; border: none; cursor: pointer; }
-        .btn-primary { background: #3498db; color: white; }
-        .btn-danger { background: #e74c3c; color: white; }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --danger-color: #e74c3c;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+        }
+
+        .navbar {
+            background: var(--primary-color);
+            padding: 1rem;
+            color: white;
+        }
+
+        .status-bar {
+            background: #34495e;
+            padding: 0.5rem;
+            color: white;
+        }
+
+        .equipment-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .sensor-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .emergency-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--danger-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        {% if user.is_authenticated %}
-            <a href="{% url 'factory_entry' %}">Завод</a>
-            <a href="{% url 'welcome' %}">Выход</a>
-        {% else %}
-            <a href="{% url 'login' %}">Вход</a>
-        {% endif %}
-    </nav>
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
 </body>
 </html>

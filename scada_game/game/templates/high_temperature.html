@@ -1,0 +1,8 @@
+<!--high_temperature.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Конверсия при высокой температуре</h1>
+    <img src="{% static 'game/images/high_temperature_conversion.png' %}" alt="High Temperature Conversion">
+    <a href="{% url 'equipment_page' %}"><button>Дальше</button></a>
+{% endblock %}

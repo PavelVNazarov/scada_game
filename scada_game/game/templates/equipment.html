@@ -1,0 +1,8 @@
+<!--equipment.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>План датчиков оборудования</h1>
+    <img src="{% static 'game/images/equipment_sensor_plan.png' %}" alt="Equipment Sensor Plan">
+    <a href="{% url 'final_page' %}"><button>Дальше</button></a>
+{% endblock %}

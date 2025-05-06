@@ -30,12 +30,21 @@ class EquipmentState(models.Model):
     def __str__(self):
         return self.name
 
+class GameStage(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='stages/')
+    next_stage = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    question = models.ForeignKey('Question', on_delete=models.SET_NULL, null=True)
+    is_final = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
 
 class PlayerProgress(models.Model):
-    user = models.OneToOneField(EmployeeProfile, on_delete=models.CASCADE)
-    current_state = models.ForeignKey(EquipmentState, on_delete=models.SET_NULL, null=True)
-    attempts = models.PositiveIntegerField('Попытки', default=3)
-    is_failed = models.BooleanField('Провал', default=False)
+    user = models.OneToOneField('accounts.EmployeeProfile', on_delete=models.CASCADE)
+    current_state = models.ForeignKey('EquipmentState', on_delete=models.SET_NULL, null=True)  # Исправлено!
+    attempts = models.PositiveIntegerField(default=3)
+    is_failed = models.BooleanField(default=False)
 
     def reset(self):
         self.current_state = EquipmentState.objects.first()
@@ -60,4 +69,5 @@ class GameEvent(models.Model):
 
     def __str__(self):
         return f"{self.get_event_type_display()}: {self.title}"
+
 

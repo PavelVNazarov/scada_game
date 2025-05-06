@@ -1,0 +1,9 @@
+<!--game/templates/preparation.html-->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Подготовка материалов</h1>
+    <img src="{% static 'game/images/preparation_materials.png' %}" alt="Preparation Materials">
+    <a href="{% url 'high_temperature_page' %}"><button>Дальше</button></a>
+{% endblock %}

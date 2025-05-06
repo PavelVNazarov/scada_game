@@ -89,7 +89,8 @@ def custom_login(request):
 def dashboard(request):
     """Основная панель управления"""
     departments = [
-        {'name': 'Завод', 'url': 'factory_entry'}
+        #{'name': 'Завод', 'url': 'factory_entry'}
+        {'name': 'Завод', 'url': 'game'}
     ]
     return render(request, 'dashboard.html', {
         'departments': departments,

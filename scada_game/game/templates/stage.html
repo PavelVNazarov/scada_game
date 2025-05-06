@@ -1,0 +1,33 @@
+<!-- game/templates/stage.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="factory-container">
+    <img src="{{ stage.image.url }}" alt="{{ stage.name }}" class="stage-image">
+
+    {% if not request.POST %}
+    <form method="post">
+        {% csrf_token %}
+        {% if stage.question %}
+        <div class="question-panel">
+            <h3>{{ stage.question.text }}</h3>
+            <input type="text" name="answer" required>
+            <button type="submit" class="btn-action">
+                {{ stage.is_final|yesno:"Завершить,Продолжить" }}
+            </button>
+        </div>
+        {% else %}
+        <button type="submit" name="start" class="btn-action">
+            {{ stage.name|default:"Загрузить" }}
+        </button>
+        {% endif %}
+    </form>
+    {% endif %}
+
+    {% if player.attempts < 3 %}
+    <div class="attempts-counter">
+        Осталось попыток: {{ player.attempts }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

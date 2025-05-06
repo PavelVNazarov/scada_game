@@ -1,0 +1,24 @@
+<!-- game/templates/final.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <h1>Конец игры</h1>
+    <p>Спасибо за игру!</p>
+    <a href="{% url 'game' %}">Начать заново</a>
+{% endblock %}
+
+<!--<div class="result-container">-->
+<!--    {% if player.is_completed %}-->
+<!--    <h2>Производство успешно завершено!</h2>-->
+<!--    <img src="/media/success.png" alt="Success">-->
+<!--    {% elif player.is_failed %}-->
+<!--    <h2 class="emergency">Аварийная остановка!</h2>-->
+<!--    <img src="/media/failure.png" alt="Failure">-->
+<!--    {% endif %}-->
+
+<!--    <a href="{% url 'reset_game' %}" class="btn-restart">-->
+<!--        Начать заново-->
+<!--    </a>-->
+<!--</div>-->
+
